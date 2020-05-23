@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nav = document.querySelector("nav")
   const loginDiv = document.querySelector("#login")
   const loginSubmit = document.querySelector(".userLoginForm")
+  const displayDailylogs = document.querySelector("#displayDailyLogs")
 
   loginSubmit.addEventListener("submit", (e) => {
     e.preventDefault()
@@ -35,14 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
       let loggedInUser = new User(user.data, user.data.attributes)
       nav.innerHTML = loggedInUser.renderWelcome()
 
-
-
       // if logged in, then render user's profile daily logs
       // show form to add foods for today
       // show nutrients consumed today
       // show nutrients needed today
 
     })
+
   })
 
 });
