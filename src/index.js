@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nav = document.querySelector("nav")
   const loginDiv = document.querySelector("#login")
   const loginSubmit = document.querySelector(".userLoginForm")
+  const driReading = document.querySelector("#displayCurrentDri")
   const displayDailylogs = document.querySelector("#displayDailyLogs")
 
   loginSubmit.addEventListener("submit", (e) => {
@@ -33,8 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(users, configObj)
     .then(resp => resp.json())
     .then(user => {
+      console.log("test")
       let loggedInUser = new User(user.data, user.data.attributes)
       nav.innerHTML = loggedInUser.renderWelcome()
+
+      renderDri(loggedInUser)
 
       // if logged in, then render user's profile daily logs
       // show form to add foods for today
@@ -44,5 +48,22 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
   })
+
+  function renderDri(user) {
+    const driDisplay = "http://localhost:3000/dris"
+    fetch(`${driDisplay}/${user.dri_id}`)
+    .then(resp => resp.json())
+    .then(driProfile => {
+      let profile = driProfile.data.attributes
+      console.log(profile)
+      for (let [key, value] of Object.entries(profile)) {
+        driReading.innerHTML +=
+        `<span>
+            ${key}: ${value}
+          </span>
+        `
+      }
+    })
+  }
 
 });

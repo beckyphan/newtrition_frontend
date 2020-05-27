@@ -1,10 +1,13 @@
+const dri = "http://localhost:3000/dris"
+
 class User {
 
   constructor(user, userAttributes) {
     this.id = user.id
     this.username = userAttributes.username
-    this.dri = []
-    // need to import in corresponding dri attributes
+    this.dri_id = userAttributes.dri_id
+    this.dri = {}
+
     User.all.push(this)
   }
 
@@ -16,19 +19,8 @@ class User {
       `
   }
 
-  renderDri() {
-    let driCard = document.createElement('div')
-    driCard.class = `dri-${this.dri.id}`
-    for (const attribute of this.dri) {
-      driCard.innerHTML +=
-        `
-        <span>
-        ${this.dri}
-        </span>
-        `
-    }
-  }
-
 }
+
+
 
 User.all = [];
