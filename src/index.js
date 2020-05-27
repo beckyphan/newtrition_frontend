@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let loggedInUser = new User(user.data, user.data.attributes)
       nav.innerHTML = loggedInUser.renderWelcome()
       driReading.innerHTML =
-      `<h4>my daily values:</h4>`
+      `<h4>my daily value intake goals:</h4>`
       renderDri(loggedInUser)
 
       // if logged in, then render user's profile daily logs
