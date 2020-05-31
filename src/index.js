@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(users, configObj)
     .then(resp => resp.json())
     .then(user => {
-      console.log("test")
       let loggedInUser = new User(user.data, user.data.attributes)
       nav.innerHTML = loggedInUser.renderWelcome()
       driReading.innerHTML =
@@ -56,14 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(resp => resp.json())
     .then(driProfile => {
       let profile = driProfile.data.attributes
-      console.log(profile)
       for (let [key, value] of Object.entries(profile)) {
         driReading.innerHTML +=
-        `<span class="dailyvalue-${key}">
+        `<span class="${key}-label">
             ${key}: ${value}
           </span><br>`
       }
     })
+
+    addUnits()
   }
 
   // function to show user's daily logs - show most recent 3 days + addtoday if not already existing
@@ -73,5 +73,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // function renderDailyLogForm(user) {
   //
   // }
+
+
+  function addUnits() {
+    // get all elements with keys in DRI's and += appropriate addUnits
+    let nutritionalLabels= {calories: "", fat: "g", sodium: "mg", potassium: "mg", carbohydrates: "g", protein: "g", vitaminA: "mcg", vitaminC: "mg", calcium: "mg", iron: "mg"}
+    for (let [key, value] of Object.entries(nutritionalLabels)) {
+      let className = `${key}-label`
+      let label = document.getElementsByClassName(className)
+      console.log(label)
+      // label[0].innerHTML += ` ${value}`
+    }
+
+  }
 
 });
